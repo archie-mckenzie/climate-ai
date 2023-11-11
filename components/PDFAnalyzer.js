@@ -73,7 +73,7 @@ function Uploader({ id, setID }) {
                     <Animated WrappedComponent={GreenalyzeButton} />
                 </>
                 ||
-                <p className='under-text'>ⓘ Upload ESG or financial report(s) of the company you would like to <b className='highlighted'>greenalyze</b></p>
+                <p className='under-text'>ⓘ Upload environmental or financial report(s) of the company you would like to <b className='highlighted'>greenalyze</b></p>
             }
         </div>
     );
