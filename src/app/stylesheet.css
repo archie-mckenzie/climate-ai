@@ -2,7 +2,7 @@
   --default-font-family: Verdana, sans-serif;
   --text-color: black;
   --background-color: white;
-  --highlight-color: #00c000;
+  --highlight-color: #80d080;
 }
 @media (prefers-color-scheme: dark) {
   :root {
