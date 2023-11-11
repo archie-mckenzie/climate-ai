@@ -2,7 +2,7 @@
   --default-font-family: Verdana, sans-serif;
   --text-color: black;
   --background-color: white;
-  --highlight-color: #00ff00;
+  --highlight-color: #00c000;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -24,5 +24,17 @@ body {
 }
 
 main {
-  min-height: calc(100vh - 85px);
+  min-height: calc(100vh - 60px);
+}
+
+.subtle-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.highlighted {
+  color: var(--highlight-color);
+}
+.highlighting:hover {
+  color: var(--highlight-color);
 }
