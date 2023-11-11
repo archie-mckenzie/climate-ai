@@ -38,3 +38,22 @@ main {
 .highlighting:hover {
   color: var(--highlight-color);
 }
+
+/* ----- HEADER ----- */
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  vertical-align: center;
+  max-width: 500px;
+  margin: auto;
+}
+.header-div {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.circle-image {
+  border-radius: 100%;
+}
