@@ -3,12 +3,15 @@
   --text-color: black;
   --background-color: white;
   --highlight-color: #80d080;
+  --default-border-radius: 5px;
+  --primary-color: white;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: white;
     --background-color: #121212;
     --highlight-color: lightgreen;
+    --primary-color: black;
   }  
 }
 
@@ -56,4 +59,27 @@ main {
 }
 .circle-image {
   border-radius: 100%;
+}
+
+/* ----- PDF Analysis ----- */
+
+.pdf-analysis-container {
+  margin: 60px auto auto auto;
+}
+
+.choose-file-button {
+  font-size: larger;
+  min-width: 200px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border: solid thin var(--text-color);
+  font-family: var(--default-font-family);
+  font-weight: bold;
+  min-height: 50px;
+  border-radius: var(--default-border-radius);
+  cursor: pointer;
+}
+.choose-file-button:hover {
+  color: var(--primary-color);
+  background-color: var(--highlight-color);
 }
