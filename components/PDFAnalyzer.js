@@ -55,7 +55,7 @@ function Uploader({ id, setID }) {
                 className={`choose-file-button`}
                 onClick={handleButtonClick}
             >
-                Select PDFs
+                {selectedFiles.length > 0 ? 'Add PDFs' : 'Select PDFs'}
             </button>
             <input
                 type="file"
