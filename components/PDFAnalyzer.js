@@ -80,7 +80,41 @@ function Uploader({ id, setID }) {
 }
 
 function JobDisplayer({ id }) {
-    
+
+    const [job, setJob] = useState(null)
+
+    useEffect(() => {
+        let interval;
+        const fetchData = async () => {
+          try {
+            const response = await fetch('api/status', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ id: id }),
+            });
+            const data = await response.json();
+            console.log(data)
+            if (data) {
+                setJob(data)
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        };
+        if (!job || !job.completed) {
+          interval = setInterval(fetchData, 1000);
+        }
+        return () => {
+          if (interval) clearInterval(interval);
+        };
+    }, [id, job]);
+
+    return (
+        <div></div>
+    )
+
 }
 
 export default function PDFAnalyzer() {
@@ -89,8 +123,13 @@ export default function PDFAnalyzer() {
 
     return (
         <>
-            <Uploader setID={setID}/>
-            <JobDisplayer id={id}/>
+            {
+                !id 
+                &&
+                <Uploader setID={setID}/>
+                ||
+                <JobDisplayer id={id}/>
+            }
         </>
     )
 
