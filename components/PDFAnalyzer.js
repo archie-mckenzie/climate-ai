@@ -8,7 +8,6 @@ export default function PDFAnalyzer() {
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
-        alert('Hello')
     };
 
     const handleButtonClick = () => {
@@ -17,23 +16,28 @@ export default function PDFAnalyzer() {
 
     return (
         <div className='pdf-analysis-container'>
-            <div>
-                <button 
-                    type="button" 
-                    className={`choose-file-button ${selectedFile ? 'highlighted-background' : ''}`}
-                    onClick={handleButtonClick}
-                >
-                    ⬆️&nbsp;&nbsp;Upload PDF
-                </button>
-                <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={handleFileChange}
-                    ref={fileInputRef}
-                    style={{ display: 'none' }}
-                />
-            </div>
-            {selectedFile && <p>{selectedFile.name}</p>}
+            <button 
+                type="button" 
+                className={`choose-file-button ${selectedFile ? 'highlighted-background' : ''}`}
+                onClick={handleButtonClick}
+            >
+                ⬆️&nbsp;&nbsp;Upload PDF
+            </button>
+            <input
+                type="file"
+                accept=".pdf"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+            />
+            {
+                selectedFile 
+                && 
+                <p>{selectedFile.name}</p>
+                ||
+                <p>ⓘ [PLACEHOLDER]</p>
+            }
         </div>
+
     );
 }
