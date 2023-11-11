@@ -31,6 +31,17 @@ main {
   min-height: calc(100vh - 60px);
 }
 
+.animated-container {
+  transform: translateY(10px);
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.rise-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .subtle-link {
   color: var(--text-color);
   text-decoration: none;

@@ -1,5 +1,7 @@
 'use client'
 
+import Animated from './animated/Animated';
+
 import { useState, useRef } from 'react';
 
 export default function PDFAnalyzer() {
@@ -30,6 +32,19 @@ export default function PDFAnalyzer() {
         }
     };
 
+    const GreenalyzeButton = () => {
+        return (
+            <button
+                type="button"
+                className={`upload-button ${selectedFiles.length ? 'highlighted-background' : ''}`}
+                onClick={handleUploadClick}
+                disabled={!selectedFiles.length}
+            >
+                ⬆️&nbsp;&nbsp;Greenalyze
+            </button>
+        )
+    }
+ 
     return (
         <div className='pdf-analysis-container'>
             <button 
@@ -51,15 +66,8 @@ export default function PDFAnalyzer() {
                 selectedFiles.length > 0 
                 && 
                 <>
-                <p className='under-text'>{selectedFiles.map(file => file.name).join(', ')}</p>
-                <button
-                    type="button"
-                    className={`upload-button ${selectedFiles.length ? 'highlighted-background' : ''}`}
-                    onClick={handleUploadClick}
-                    disabled={!selectedFiles.length}
-                >
-                        ⬆️&nbsp;&nbsp;Greenalyze
-                    </button>
+                    <p className='under-text'>{selectedFiles.map(file => file.name).join(', ')}</p>
+                    <Animated WrappedComponent={GreenalyzeButton} />
                 </>
                 ||
                 <p className='under-text'>ⓘ Upload ESG or financial report(s) of the company you would like to <b className='highlighted'>greenalyze</b></p>
