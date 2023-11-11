@@ -22,7 +22,7 @@ export default function PDFAnalyzer() {
             formData.append('files', file);
         });
         try {
-            const response = await fetch('/api/openai/greenalyze', {
+            const response = await fetch('/api/greenalyze', {
                 method: 'POST',
                 body: formData,
             });
