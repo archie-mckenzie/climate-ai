@@ -18,8 +18,8 @@ function Uploader({ id, setID }) {
 
     const handleUploadClick = async () => {
         const formData = new FormData();
-        selectedFiles.forEach(file => {
-            formData.append('files', file);
+        selectedFiles.forEach((file, index) => {
+            formData.append(`files-${index}`, file);
         });
         try {
             const response = await fetch('/api/greenalyze', {
