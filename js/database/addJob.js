@@ -8,6 +8,7 @@ export default async function addJob() {
         const job = {
             "_id": _id,
             "timestamp": Date.now(),
+            "completed": false
         }
         const client = await connectToMongoDB;
         const jobs = client.db('greenalysis').collection('jobs');

@@ -79,10 +79,19 @@ function Uploader({ id, setID }) {
     );
 }
 
+function JobDisplayer({ id }) {
+    
+}
+
 export default function PDFAnalyzer() {
+
     const [id, setID] = useState('')
-    const [job, setJob] = useState(null)
+
     return (
-        <Uploader id={id} setID={setID}/>
+        <>
+            <Uploader setID={setID}/>
+            <JobDisplayer id={id}/>
+        </>
     )
+
 }
