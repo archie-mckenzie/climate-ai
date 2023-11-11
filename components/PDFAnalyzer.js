@@ -4,7 +4,7 @@ import Animated from './animated/Animated';
 
 import { useState, useRef } from 'react';
 
-export default function PDFAnalyzer() {
+function Uploader({ id, setID }) {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -26,7 +26,10 @@ export default function PDFAnalyzer() {
                 method: 'POST',
                 body: formData,
             });
-            console.log(await response.json());
+            const data = await response.json()
+            if (data.id) {
+                setID(data.id)
+            }
         } catch (error) {
             console.error('Upload failed:', error);
         }
@@ -74,4 +77,12 @@ export default function PDFAnalyzer() {
             }
         </div>
     );
+}
+
+export default function PDFAnalyzer() {
+    const [id, setID] = useState('')
+    const [job, setJob] = useState(null)
+    return (
+        <Uploader id={id} setID={setID}/>
+    )
 }
