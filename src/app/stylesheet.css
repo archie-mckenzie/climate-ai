@@ -90,3 +90,11 @@ main {
   background-color: var(--highlight-color);
   cursor:auto;
 }
+
+.under-text {
+  text-align: center;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 2;
+}
