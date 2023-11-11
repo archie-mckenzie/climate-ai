@@ -29,10 +29,11 @@ export default function PDFAnalyzer() {
             selectedFiles.forEach(file => {
                 formData.append('files', file);
             });
-            const response = await fetch('/api/openai', {
+            const response = await fetch('/api/openai/greenalyze', {
                 method: 'POST',
                 body: formData,
             });
+            console.log(await response.json())
             setAnalyzing(false)
         }
         if (!analyzing) {
@@ -62,7 +63,7 @@ export default function PDFAnalyzer() {
                 && 
                 <p className='under-text'>{selectedFiles.map(file => file.name).join(', ')}</p>
                 ||
-                <p className='under-text'>ⓘ Upload ESG or financial report(s) of the company you would like to <b className='highlighted'>greenalyse</b></p>
+                <p className='under-text'>ⓘ Upload ESG or financial report(s) of the company you would like to <b className='highlighted'>greenalyze</b></p>
             }
         </div>
     );
