@@ -1,9 +1,11 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+
 
 export default function PDFAnalyzer() {
-    const [analyzing, setAnalyzing] = useState(false)
+    const [analyzing, setAnalyzing] = useState(false);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -12,34 +14,34 @@ export default function PDFAnalyzer() {
             setSelectedFiles([...event.target.files]);
             setAnalyzing(true);
         }
-        
-        
-
     };
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
     };
 
-    // UseEffect
     useEffect(() => {
-        async function uploadFiles() {
-            setAnalyzing(true)
-            const formData = new FormData();
-            selectedFiles.forEach(file => {
-                formData.append('files', file);
-            });
-            const response = await fetch('/api/openai/greenalyze', {
-                method: 'POST',
-                body: formData,
-            });
-            console.log(await response.json())
-            setAnalyzing(false)
+        if (selectedFiles.length > 0 && !analyzing) {
+            async function uploadFiles() {
+                setAnalyzing(true);
+                const formData = new FormData();
+                selectedFiles.forEach(file => {
+                    formData.append('files', file);
+                });
+                try {
+                    const response = await fetch('/api/openai/greenalyze', {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    console.log(await response.json());
+                } catch (error) {
+                    console.error('Upload failed:', error);
+                }
+                setAnalyzing(false);
+            }
+            uploadFiles();
         }
-        if (!analyzing) {
-            uploadFiles()
-        }
-    }, [selectedFiles])
+    }, [selectedFiles]);
 
     return (
         <div className='pdf-analysis-container'>
