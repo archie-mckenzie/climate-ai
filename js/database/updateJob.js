@@ -17,6 +17,7 @@ export default async function updateJob(id, params) {
     } catch (error) {
         console.log(error)
         return false;
+        // updateJob(id, {"completed": true})
     }
 }
 
