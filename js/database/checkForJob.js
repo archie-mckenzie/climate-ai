@@ -4,7 +4,7 @@ export default async function checkForJob(companyName) {
     try {
         const client = await connectToMongoDB;
         const jobs = client.db('greenalysis').collection('jobs');
-        const job = await jobs.findOne({ company_name: companyName })
+        const job = await jobs.findOne({ company_name: companyName, completed: true })
         if (job) {
             return job;
         } else {

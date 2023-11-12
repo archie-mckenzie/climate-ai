@@ -39,6 +39,7 @@ async function executeAssistant(filepaths, instruction, id) {
       const ticker = result.companyName
       const rawRevenueData = await fetchRevenue(ticker)
       const revenueData = simplifyRevenueData(rawRevenueData)
+      console.log(revenueData)
       const newSucceeded = await updateJob(id, revenueData)
 
       return newSucceeded

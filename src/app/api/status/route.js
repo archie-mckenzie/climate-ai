@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import findJob from "../../../../js/database/findJob";
+import checkForJob from "../../../../js/database/checkForJob";
 
 // Check if body is defined
 function isValid(body) {
@@ -17,6 +18,10 @@ export async function POST(req) {
     const id = body.id;
     try {
         const job = await findJob(id)
+        if (job && job.company_name && !job.completed) {
+            const exists = await checkForJob(job.company_name)
+            if (exists) { return exists }
+        }
         if (job) {
             return NextResponse.json(job);
         } else {
