@@ -4,7 +4,7 @@ export default async function updateJob(id, params) {
     try {
         const client = await connectToMongoDB;
         const jobs = client.db('greenalysis').collection('jobs');
-        const result = await jobs.insertOne(
+        const result = await jobs.updateOne(
             { _id: id }, // Replace with your document's ID
             { $set: params }, // Replace with your update
             { upsert: true }
@@ -17,7 +17,6 @@ export default async function updateJob(id, params) {
     } catch (error) {
         console.log(error)
         return false;
-        // updateJob(id, {"completed": true})
     }
 }
 
