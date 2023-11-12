@@ -1,5 +1,6 @@
 'use client'
 
+import GreenalysisDisplay from './GreenalysisDisplay';
 import Animated from './animated/Animated';
 import LoadingAnimation from './loading/LoadingAnimation';
 
@@ -51,6 +52,7 @@ function Uploader({ setID }) {
  
     return (
         <div className='pdf-analysis-container'>
+            <>
             <button 
                 type="button" 
                 className={`choose-file-button`}
@@ -76,6 +78,7 @@ function Uploader({ setID }) {
                 ||
                 <p className='under-text'>ⓘ Upload the latest environmental statement of the company you would like to <b className='highlighted'>greenalyze</b></p>
             }
+            </>
         </div>
     );
 }
@@ -115,7 +118,11 @@ function JobDisplayer({ id }) {
     return (
         <div>
             {   
-                !job 
+                job &&
+                <GreenalysisDisplay job={job} />
+            }
+            {
+                (!job || job.completed === false)
                 &&
                 <div>
                     <br/><br/>

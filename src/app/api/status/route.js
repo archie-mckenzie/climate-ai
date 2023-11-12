@@ -10,7 +10,7 @@ function isValid(body) {
 
 export async function POST(req) {
     console.log('Status request...')
-    const body = req.json();
+    const body = await req.json();
     if (!isValid(body)) {
         return NextResponse.json({ error: "Invalid request!" });
     }

@@ -73,12 +73,11 @@ export async function POST(req) {
     return NextResponse.json({error: 'Oops'});
   } finally {
     if (filePaths != '') {
-      const results = await Promise.all([
+      Promise.all([
         executeAssistant(filePaths, 'fetchNetEmissions', id),
         executeAssistant(filePaths, 'fetchCompany', id),
         executeAssistant(filePaths, 'fetchSummary', id),
-      ]);
-      updateJob(id, { "completed": results.some(element => element === true) });
+      ]).then((results) => {updateJob(id, { "completed": results.some(element => element === true) })})
     }
   }
 }
