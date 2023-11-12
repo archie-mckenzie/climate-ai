@@ -4,7 +4,7 @@ import Animated from './animated/Animated';
 
 import { useState, useRef } from 'react';
 
-function Uploader({ id, setID }) {
+function Uploader({ setID }) {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -73,7 +73,7 @@ function Uploader({ id, setID }) {
                     <Animated WrappedComponent={GreenalyzeButton} />
                 </>
                 ||
-                <p className='under-text'>ⓘ Upload environmental or financial report(s) of the company you would like to <b className='highlighted'>greenalyze</b></p>
+                <p className='under-text'>ⓘ Upload the latest environmental statement of the company you would like to <b className='highlighted'>greenalyze</b></p>
             }
         </div>
     );
@@ -96,11 +96,11 @@ function JobDisplayer({ id }) {
             });
             const data = await response.json();
             console.log(data)
-            if (data) {
+            if (data && !data.error) {
                 setJob(data)
             }
           } catch (error) {
-            console.error('Error:', error);
+            console.log(error);
           }
         };
         if (!job || !job.completed) {
@@ -112,7 +112,13 @@ function JobDisplayer({ id }) {
     }, [id, job]);
 
     return (
-        <div></div>
+        <div>
+            {   
+                !job 
+                &&
+                <div><Animated WrappedComponent={<LoadingAnimation/>} /></div>
+            }
+        </div>
     )
 
 }

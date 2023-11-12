@@ -1,4 +1,4 @@
-import './stylesheet.css'
+import '../../css/stylesheet.css'
 
 export const metadata = {
   title: 'Greenalysis',
