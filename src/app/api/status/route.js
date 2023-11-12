@@ -20,7 +20,7 @@ export async function POST(req) {
         const job = await findJob(id)
         if (job && job.company_name && !job.completed) {
             const exists = await checkForJob(job.company_name)
-            if (exists) { return exists }
+            if (exists) { return NextResponse.json(exists) }
         }
         if (job) {
             return NextResponse.json(job);
