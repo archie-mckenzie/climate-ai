@@ -70,8 +70,7 @@ export async function POST(req) {
         executeAssistant(fullFilePath, 'fetchCompany', id),
         executeAssistant(fullFilePath, 'fetchSummary', id),
       ]);
+      updateJob(id, { "completed": results });
     }
-
-    updateJob(id, { "completed": results });
   }
 }

@@ -1,8 +1,9 @@
 'use client'
 
 import Animated from './animated/Animated';
+import LoadingAnimation from './loading/LoadingAnimation';
 
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function Uploader({ setID }) {
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -116,7 +117,10 @@ function JobDisplayer({ id }) {
             {   
                 !job 
                 &&
-                <div><Animated WrappedComponent={<LoadingAnimation/>} /></div>
+                <div>
+                    <br/><br/>
+                    <Animated WrappedComponent={LoadingAnimation} />
+                </div>
             }
         </div>
     )
