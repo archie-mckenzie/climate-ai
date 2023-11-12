@@ -36,7 +36,7 @@ async function executeAssistant(filepaths, instruction, id) {
     }
 
     if (instruction === 'fetchCompany') {
-      const ticker = result.companyName
+      const ticker = result.company_name
       const rawRevenueData = await fetchRevenue(ticker)
       const revenueData = simplifyRevenueData(rawRevenueData)
       console.log(revenueData)
