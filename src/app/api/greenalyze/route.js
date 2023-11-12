@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import queryAssistant from "../../../../js/openai/queryAssistant";
 import addJob from "../../../../js/database/addJob";
 import updateJob from "../../../../js/database/updateJob";
+import checkForJob from "../../../../js/database/checkForJob";
 
 const { existsSync } = require("fs");
 const fs = require("fs/promises");
@@ -17,9 +18,7 @@ async function executeAssistant(filepaths, instruction, id) {
     const clean = cleanJsonString(unclean)
     console.log(clean)
     const result = JSON.parse(clean)
-    
     const succeeded = await updateJob(id, result)
-
     return succeeded
   } catch(error) {
     console.log(error)
@@ -77,7 +76,7 @@ export async function POST(req) {
         executeAssistant(filePaths, 'fetchNetEmissions', id),
         executeAssistant(filePaths, 'fetchCompany', id),
         executeAssistant(filePaths, 'fetchSummary', id),
-      ]).then((results) => {updateJob(id, { "completed": results.some(element => element === true) })})
+      ]).then((results) => {updateJob(id, { "completed": results[1] == true })})
     }
   }
 }
