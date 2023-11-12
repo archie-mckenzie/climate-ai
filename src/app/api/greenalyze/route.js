@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import queryAssitant from "../../../../js/openai/queryAssistant";
+import queryAssistant from "../../../../js/openai/queryAssistant";
 import addJob from "../../../../js/database/addJob";
 import updateJob from "../../../../js/database/updateJob";
 
@@ -13,7 +13,7 @@ function cleanJsonString(str) {
 
 async function executeAssistant(filepaths, instruction, id) {
   try {
-    const unclean = await queryAssitant(filepaths, instruction)
+    const unclean = await queryAssistant(filepaths, instruction)
     const clean = cleanJsonString(unclean)
     console.log(clean)
     const result = JSON.parse(clean)

@@ -3,7 +3,7 @@ import OpenAI from "openai";
 const openai = new OpenAI();
 openai.apiKey = process.env.OPENAI_API_KEY;
 
-export default async function queryAssitant( files, queryType ) {
+export default async function queryAssistant( files, queryType ) {
     try {
         let fileIDs = [];
 
