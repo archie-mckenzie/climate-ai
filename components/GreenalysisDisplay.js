@@ -1,3 +1,4 @@
+import Image from "next/image";
 export default function GreenalysisDisplay({job}) {
     return (
         <div className="links">
@@ -12,6 +13,7 @@ export default function GreenalysisDisplay({job}) {
                 job.summary &&
                 <p>{job.summary}</p>
             }
+            <Image width={100} height={200} src='./useless-graph.jpg' />
         </div>
     );
 };
