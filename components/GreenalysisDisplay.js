@@ -15,11 +15,11 @@ export default function GreenalysisDisplay({job}) {
             }
             {
                 job.annualReport && job.net_carbon_emissions &&
-                <p><b>Emissions Past 5 Years: {(job.annualReport.reduce((sum, report) => sum + report.totalRevenue, 0))*(job.net_carbon_emissions / job.annualReport[1].totalRevenue)} metric tons</b></p>
+                <p><b>Emissions Past 5 Years: {(job.annualReport[0].totalRevenue + job.annualReport[1].totalRevenue + job.annualReport[2].totalRevenue + job.annualReport[3].totalRevenue + job.annualReport[4].totalRevenue)*(job.net_carbon_emissions / job.annualReport[1].totalRevenue)} metric tons</b></p>
             }
             {
                 job.annualReport &&
-                <p><b>Total Cost of Emissions Past 5 Years: ${51*(job.annualReport.reduce((sum, report) => sum + report.totalRevenue, 0))*(job.net_carbon_emissions / job.annualReport[1].totalRevenue)}</b></p>
+                <p><b>Total Cost of Emissions Past 5 Years: ${51*((job.annualReport[0].totalRevenue + job.annualReport[1].totalRevenue + job.annualReport[2].totalRevenue + job.annualReport[3].totalRevenue + job.annualReport[4].totalRevenue))*(job.net_carbon_emissions / job.annualReport[1].totalRevenue)}</b></p>
             }
             {
                 job.summary &&
