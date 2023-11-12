@@ -85,6 +85,7 @@ function JobDisplayer({ id }) {
     const [job, setJob] = useState(null)
 
     useEffect(() => {
+        if (!job || !job.completed) {
         let interval;
         const fetchData = async () => {
           try {
@@ -104,12 +105,11 @@ function JobDisplayer({ id }) {
             console.log(error);
           }
         };
-        if (!job || !job.completed) {
-          interval = setInterval(fetchData, 1000);
-        }
+        interval = setInterval(fetchData, 1000);
         return () => {
           if (interval) clearInterval(interval);
         };
+        }
     }, [id, job]);
 
     return (

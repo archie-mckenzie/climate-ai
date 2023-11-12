@@ -43,7 +43,7 @@ export default function PastGreenalyses() {
             jobs.length > 0 
             &&
             jobs.map((job, index) => {
-                return <GreenalysisPanel id={job._id} name={job.name} key={index}/>
+                return <GreenalysisPanel id={job._id} name={job.company_name} key={index}/>
             })
           }
           {
