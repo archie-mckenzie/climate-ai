@@ -18,7 +18,7 @@ export default async function queryAssitant( files, queryType ) {
         }
 
         const instructions = "You are an analyst of company emissions data. " +
-                             "You are given a series of PDFs regarding a comapny's revenues, priduction, and emissions data, " +
+                             "You are given a series of PDFs regarding a comapny's revenues, production, and emissions data, " +
                              "and it is your task to respond to any questions that can be answered by reading through and analyzing the files. " +
                              "Return your analysis in whichever format is requested.";
 
@@ -99,10 +99,9 @@ export default async function queryAssitant( files, queryType ) {
                 }
             }
         } else if ( queryType === 'fetchSummary' ) {
-            const prompt = "Give me a summary of 5 key points about the analyzed company's environmental plans in the past " +
-                           "and how they will change going forward, making sure to include details about past " +
+            const prompt = "Give me a short summary of how the company is protecting the environment. Be harsh. " +
+                           "Make sure to include details about past " +
                            "emissions and whether or not much has changed in recent times. " +
-                           "Do not be lenient with a company if they are guilty of excess emissions. " +
                            "Return a JSON in the following format:" +
                            "{\n" +
                            "    \"summary\": string summary of environmental plans\n" +

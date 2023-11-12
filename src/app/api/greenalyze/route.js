@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import queryAssitant from "../../../../js/openai/queryAssitant";
+import queryAssitant from "../../../../js/openai/queryAssistant";
 import addJob from "../../../../js/database/addJob";
 import updateJob from "../../../../js/database/updateJob";
 
