@@ -1,22 +1,21 @@
-'use strict';
-var request = require('request');
+import fetch from 'node-fetch';
 
 export async function fetchRevenue(ticker) {
-    return new Promise((resolve, reject) => {
-        const url = `https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${ticker}&apikey=JQ9RIEKKBNC6WKWU`;
+    const url = `https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${ticker}&apikey=JQ9RIEKKBNC6WKWU`;
 
-        request.get({
-            url: url,
-            json: true,
+    try {
+        const response = await fetch(url, {
             headers: {'User-Agent': 'request'}
-        }, (err, res, data) => {
-            if (err) {
-                reject(err);
-            } else if (res.statusCode !== 200) {
-                reject(`Status: ${res.statusCode}`);
-            } else {
-                resolve(data);
-            }
         });
-    });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data: ', error);
+        throw error;
+    }
 }

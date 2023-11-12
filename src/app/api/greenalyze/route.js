@@ -3,10 +3,23 @@ import queryAssistant from "../../../../js/openai/queryAssistant";
 import addJob from "../../../../js/database/addJob";
 import updateJob from "../../../../js/database/updateJob";
 import checkForJob from "../../../../js/database/checkForJob";
+import { fetchRevenue } from "../../../../js/revenues/fetchRevenue";
 
 const { existsSync } = require("fs");
 const fs = require("fs/promises");
 const path = require("path");
+
+function simplifyRevenueData(data) {
+  const simplifiedData = {
+      symbol: data.symbol,
+      annualReport: data.annualReports.map(report => ({
+          fiscalYear: report.fiscalDateEnding.split('-')[0], // Extracting the year from 'fiscalDateEnding'
+          totalRevenue: report.totalRevenue
+      }))
+  };
+
+  return simplifiedData;
+}
 
 function cleanJsonString(str) {
   return str.replace(/^\s*```\w*\n?|\n?```s*$/g, '');
@@ -16,9 +29,20 @@ async function executeAssistant(filepaths, instruction, id) {
   try {
     const unclean = await queryAssistant(filepaths, instruction)
     const clean = cleanJsonString(unclean)
-    console.log(clean)
     const result = JSON.parse(clean)
     const succeeded = await updateJob(id, result)
+    if(!succeeded) {
+      return false
+    }
+
+    if (instruction === 'fetchCompany') {
+      const ticker = result.companyName
+      const rawRevenueData = await fetchRevenue(ticker)
+      const revenueData = simplifyRevenueData(rawRevenueData)
+      const newSucceeded = await updateJob(id, revenueData)
+
+      return newSucceeded
+    }
     return succeeded
   } catch(error) {
     console.log(error)
