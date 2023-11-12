@@ -28,7 +28,7 @@ body {
 }
 
 main {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 150px);
 }
 
 .animated-container {
@@ -62,6 +62,7 @@ main {
   align-items: center;
   text-align: center;
   vertical-align: center;
+  width: 90%;
   max-width: 500px;
   margin: auto;
 }
@@ -127,4 +128,31 @@ main {
   margin-left: auto;
   margin-right: auto;
   line-height: 2;
+}
+
+/* ----- LINKS ----- */
+
+.links {
+  line-height: 2;
+  margin: 30px auto auto;
+}
+
+/* ----- GREENALYSIS PANEL ----- */
+
+.greenalysis-panel {
+  font-size: larger;
+  min-width: 200px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border: solid thin var(--text-color);
+  font-family: var(--default-font-family);
+  font-weight: bold;
+  min-height: 50px;
+  border-radius: var(--default-border-radius);
+  cursor: pointer;
+  margin-top: 20px;
+}
+.greenalysis-panel:hover {
+  color: var(--primary-color);
+  background-color: var(--highlight-color);
 }

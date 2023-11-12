@@ -1,17 +1,17 @@
-
-import Header from "../../components/Header"
-import PDFAnalyzer from "../../components/PDFAnalyzer"
+import Header from "../../../components/Header"
 import Link from "next/link"
+import PastGreenalyses from "../../../components/PastGreenalyses"
 
-export default function Home() {
+export default function Greenalyses() {
   return (
     <>
       <main>
         <Header />
-        <PDFAnalyzer />
+        <br/>
+        <PastGreenalyses />
       </main>
       <footer className="links">
-        <Link href='/greenalyses' className='subtle-link highlighting'>✅ See completed greenalyses</Link>
+        <Link href='/' className='subtle-link highlighting'>🚀 Launch a new greenalysis</Link>
         <br/>
         <Link href='/team' className='subtle-link highlighting'>👷‍♂️ Meet the team</Link>
         <br/>
