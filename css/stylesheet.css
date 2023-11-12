@@ -123,6 +123,7 @@ main {
 .under-text {
   text-align: center;
   width: 400px;
+  max-width: 90%;
   margin-left: auto;
   margin-right: auto;
   line-height: 2;
