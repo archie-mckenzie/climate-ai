@@ -13,7 +13,7 @@ export default function GreenalysisDisplay({job}) {
                 job.summary &&
                 <p>{job.summary}</p>
             }
-            <Image width={100} height={200} src='./useless-graph.jpg' />
+            <Image width={300} height={600} src='/useless-graph.jpg' />
         </div>
     );
 };
