@@ -36,7 +36,7 @@ export default async function queryAssitant( files, queryType ) {
             const prompt = "What were the analyzed company's net carbon (CO2) emissions for the past fiscal year? " +
                            "Give me only the raw number, formatted as the following JSON:\n" +
                            "{\n" +
-                           "    'netCarbonEmissions': integer value of net carbon emissions\n" +
+                           "    \"net_carbon_emissions\": integer value of net carbon emissions\n" +
                            "}";
             
             const threadMessage = await openai.beta.threads.messages.create(
@@ -61,7 +61,6 @@ export default async function queryAssitant( files, queryType ) {
                     const messages = await openai.beta.threads.messages.list(
                         thread.id
                     );
-                    console.log(messages.body.data[0].content[0].text.value)
                     return messages.body.data[0].content[0].text.value
                 }
             }
@@ -71,7 +70,7 @@ export default async function queryAssitant( files, queryType ) {
                            "knowledge to identify the correct ticker. " +
                            "Give me only the raw string name, formatted as the following JSON:\n" +
                            "{\n" +
-                           "    'companyName': stock ticker of the company\n" +
+                           "    \"company_name\": stock ticker of the company\n" +
                            "}";
                 
             const threadMessage = await openai.beta.threads.messages.create(
@@ -96,18 +95,17 @@ export default async function queryAssitant( files, queryType ) {
                     const messages = await openai.beta.threads.messages.list(
                         thread.id
                     );
-                    console.log(messages.body.data[0].content[0].text.value)
                     return messages.body.data[0].content[0].text.value
                 }
             }
         } else if ( queryType === 'fetchSummary' ) {
-            const prompt = "Give me a summary of 5 key points about the analyzed company's ESG plans in the past " +
+            const prompt = "Give me a summary of 5 key points about the analyzed company's environmental plans in the past " +
                            "and how they will change going forward, making sure to include details about past " +
                            "emissions and whether or not much has changed in recent times. " +
                            "Do not be lenient with a company if they are guilty of excess emissions. " +
                            "Return a JSON in the following format:" +
                            "{\n" +
-                           "    'summary': string summary of ESG plans\n" +
+                           "    \"summary\": string summary of environmental plans\n" +
                            "}";
 
             const threadMessage = await openai.beta.threads.messages.create(
@@ -132,7 +130,6 @@ export default async function queryAssitant( files, queryType ) {
                     const messages = await openai.beta.threads.messages.list(
                         thread.id
                     );
-                    console.log(messages.body.data[0].content[0].text.value)
                     return messages.body.data[0].content[0].text.value
                 }
             }

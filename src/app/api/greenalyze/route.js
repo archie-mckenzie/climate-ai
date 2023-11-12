@@ -7,11 +7,20 @@ const { existsSync } = require("fs");
 const fs = require("fs/promises");
 const path = require("path");
 
+function cleanJsonString(str) {
+  return str.replace(/^\s*```\w*\n?|\n?```s*$/g, '');
+}
+
 async function executeAssistant(filepaths, instruction, id) {
   try {
-    const result = await queryAssitant(filepaths, instruction)
-    console.log(result)
-    return false
+    const unclean = await queryAssitant(filepaths, instruction)
+    const clean = cleanJsonString(unclean)
+    console.log(clean)
+    const result = JSON.parse(clean)
+    
+    const succeeded = await updateJob(id, result)
+
+    return succeeded
   } catch(error) {
     console.log(error)
     return false
@@ -31,10 +40,9 @@ export async function POST(req) {
     return NextResponse.json({error: 'ID is blank'});
   }
 
-  let fullFilePath = ''
+  const filePaths = [];
 
   try {
-    const filePaths = [];
     let index = 0;
     while (true) {
 
@@ -53,7 +61,7 @@ export async function POST(req) {
             await fs.mkdir(destinationDirPath, { recursive: true });
         }
 
-        fullFilePath = path.join(destinationDirPath, file.name); // Full path including file name
+        const fullFilePath = path.join(destinationDirPath, file.name); // Full path including file name
         await fs.writeFile(fullFilePath, Buffer.from(fileArrayBuffer));
 
         filePaths.push(fullFilePath); // Push full file path to array
@@ -64,13 +72,13 @@ export async function POST(req) {
     console.log(error)
     return NextResponse.json({error: 'Oops'});
   } finally {
-    if (fullFilePath != '') {
+    if (filePaths != '') {
       const results = await Promise.all([
-        executeAssistant(fullFilePath, 'fetchNetEmissions', id),
-        executeAssistant(fullFilePath, 'fetchCompany', id),
-        executeAssistant(fullFilePath, 'fetchSummary', id),
+        executeAssistant(filePaths, 'fetchNetEmissions', id),
+        executeAssistant(filePaths, 'fetchCompany', id),
+        executeAssistant(filePaths, 'fetchSummary', id),
       ]);
-      updateJob(id, { "completed": results });
+      updateJob(id, { "completed": results.some(element => element === true) });
     }
   }
 }
